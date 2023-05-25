@@ -20,8 +20,8 @@ export default function DropdownTools({ person, open, setOpen, type }: DropdownT
     let top = rect.bottom + window.scrollY - 45;
     let left = rect.right - 170 + window.scrollX;
 
-    if (top + 200 > window.innerHeight + window.scrollY) {
-      top = window.innerHeight + window.scrollY - 187;
+    if (top + 220 > window.innerHeight + window.scrollY) {
+      top = window.innerHeight + window.scrollY - 230;
     }
 
     setDropdownPosition({ top, left });
