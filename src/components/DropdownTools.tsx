@@ -67,13 +67,13 @@ export default function DropdownTools({ person, open, setOpen, type }: DropdownT
           style={{ top: dropdownPosition.top, left: dropdownPosition.left }}
         >
           {type == 'customers' && (
-          <label className='flex cursor-pointer relative decoration-clone items-center justify-start px-4 py-2 hover:bg-gray-100/60 text-gray-700'>
-            <div className='select-none flex gap-3 items-center'>
-              <User strokeWidth={1.5} className='text-gray-700/90 w-5 h-5' />
-              Ver Contatos
-            </div>
-            <div className='absolute bottom-0 left-0 right-0 h-px w-11/12 bg-gray-300 mx-auto rounded-full'></div>
-          </label>)}
+            <label className='flex cursor-pointer relative decoration-clone items-center justify-start px-4 py-2 hover:bg-gray-100/60 text-gray-700'>
+              <div className='select-none flex gap-3 items-center'>
+                <User strokeWidth={1.5} className='text-gray-700/90 w-5 h-5' />
+                Ver Contatos
+              </div>
+              <div className='absolute bottom-0 left-0 right-0 h-px w-11/12 bg-gray-300 mx-auto rounded-full'></div>
+            </label>)}
           <label className='flex cursor-pointer relative decoration-clone items-center justify-start px-4 py-2 hover:bg-gray-100/60 text-gray-700'>
             <div className='select-none flex gap-3 items-center'>
               <Edit2 strokeWidth={1.5} className='text-gray-700/90 w-5 h-5' />
@@ -83,14 +83,14 @@ export default function DropdownTools({ person, open, setOpen, type }: DropdownT
           </label>
           <label className='flex cursor-pointer relative items-center justify-start px-4 py-2 hover:bg-gray-100/60 text-gray-700'>
             <div className='select-none flex gap-3 items-center'>
-            <Download strokeWidth={1.5} className='text-gray-700/90 w-5 h-5' />
+              <Download strokeWidth={1.5} className='text-gray-700/90 w-5 h-5' />
               Relatório
             </div>
             <div className='absolute bottom-0 left-0 right-0 h-px w-11/12 bg-gray-300 mx-auto rounded-full'></div>
           </label>
           <label className='flex cursor-pointer relative items-center justify-start px-4 py-2 hover:bg-red-100/40 text-red-500/90'>
             <div className='select-none flex gap-3 items-center'>
-            <Trash strokeWidth={1.5} className='text-red-500/80 w-5 h-5' />
+              <Trash strokeWidth={1.5} className='text-red-500/80 w-5 h-5' />
               Deletar
             </div>
           </label>

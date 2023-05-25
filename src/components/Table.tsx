@@ -1,8 +1,8 @@
 'use client';
+import { PersonResponse } from '@/interfaces';
 import { Plus, Search } from 'lucide-react';
 import { useState } from 'react';
 import DropdownTools from './DropdownTools';
-import { PersonResponse } from '@/interfaces';
 
 interface TableProps {
   response: PersonResponse[];
