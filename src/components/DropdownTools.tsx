@@ -1,6 +1,6 @@
 'use client';
 import { ContactResponse } from '@/interfaces';
-import { Edit2, MoreVertical, Phone, Trash } from 'lucide-react';
+import { Edit2, Mail, MoreVertical, Phone, Trash } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 
 interface DropdownToolsProps {
@@ -69,6 +69,13 @@ export default function DropdownTools({ contact, open, setOpen }: DropdownToolsP
             <div className='flex items-center gap-3 select-none'>
               <Phone strokeWidth={1.5} className='w-5 h-5 text-gray-700/90' />
               Ligar
+            </div>
+            <div className='absolute bottom-0 left-0 right-0 w-11/12 h-px mx-auto bg-gray-300 rounded-full'></div>
+          </a>
+          <a href={`mailto:${contact.email}`} className='relative flex items-center justify-start px-4 py-2 text-gray-700 cursor-pointer decoration-clone hover:bg-gray-100/60'>
+            <div className='flex items-center gap-3 select-none'>
+              <Mail strokeWidth={1.5} className='w-5 h-5 text-gray-700/90' />
+              Enviar Email
             </div>
             <div className='absolute bottom-0 left-0 right-0 w-11/12 h-px mx-auto bg-gray-300 rounded-full'></div>
           </a>
