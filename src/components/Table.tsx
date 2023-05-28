@@ -1,16 +1,14 @@
 'use client';
-import { PersonResponse } from '@/interfaces';
+import { UserResponse } from '@/interfaces';
 import { Plus, Search } from 'lucide-react';
 import { useState } from 'react';
 import DropdownTools from './DropdownTools';
 
 interface TableProps {
-  response: PersonResponse[];
-  type: 'customers' | 'contacts';
-  title: string;
+  response: UserResponse[];
 }
 
-export default function Table({ response, type, title }: TableProps) {
+export default function Table({ response }: TableProps) {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [open, setOpen] = useState<number>(0);
 
@@ -24,7 +22,7 @@ export default function Table({ response, type, title }: TableProps) {
 
   return (
     <div className='container px-4 py-6 mx-auto'>
-      <h1 className='py-4 mb-10 text-3xl font-bold text-gray-800 border-b'>{title}</h1>
+      <h1 className='py-4 mb-10 text-3xl font-bold text-gray-800 border-b'>Contatos</h1>
       <div className='flex items-center justify-between mb-4'>
         <div className='flex-1 pr-4'>
           <div className='relative md:w-1/3'>
@@ -47,7 +45,7 @@ export default function Table({ response, type, title }: TableProps) {
                 className='flex items-center gap-1 px-2 py-2 font-semibold text-gray-500 bg-white rounded-lg hover:text-blue-500 md:px-4'
               >
                 <Plus className='w-5 h-5' strokeWidth={2.5} />
-                <span className='hidden md:block'>Adicionar {title.slice(0, title.length - 1)}</span>
+                <span className='hidden md:block'>Adicionar Contato</span>
               </button>
             </div>
           </div>
@@ -68,30 +66,30 @@ export default function Table({ response, type, title }: TableProps) {
             </tr>
           </thead>
           <tbody className=''>
-            {response.map((person) => (
-              <tr key={person.id}>
+            {response.map((user) => (
+              <tr key={user.id}>
                 <td className='border-t border-gray-200 border-dashed'>
                   <span className='flex items-center px-6 py-3 text-gray-700'>
-                    {person.fullName}
+                    {user.fullName}
                   </span>
                 </td>
                 <td className='border-t border-gray-200 border-dashed'>
                   <span className='flex items-center px-6 py-3 text-gray-700'>
-                    {person.email}
+                    {user.email}
                   </span>
                 </td>
                 <td className='border-t border-gray-200 border-dashed'>
                   <span className='flex items-center px-6 py-3 text-gray-700'>
-                    {person.phone}
+                    {user.phone}
                   </span>
                 </td>
                 <td className='border-t border-gray-200 border-dashed'>
                   <span className='flex items-center px-6 py-3 text-gray-700'>
-                    {person.createdAt}
+                    {user.createdAt}
                   </span>
                 </td>
                 <td className='relative mt-2 mr-4 border-t border-gray-200 border-dashed '>
-                  <DropdownTools person={person} open={open} setOpen={setOpen} type={type} />
+                  <DropdownTools user={user} open={open} setOpen={setOpen} />
                 </td>
               </tr>
             ))}
