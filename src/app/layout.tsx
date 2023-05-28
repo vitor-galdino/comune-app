@@ -4,8 +4,8 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
-  title: 'Customer Tracker',
-  description: 'Simplifique seu gerenciamento de clientes com o Customer Tracker.',
+  title: 'Comune App',
+  description: 'O Comune é a solução perfeita para gerenciar seus contatos com facilidade.',
 };
 
 export default function RootLayout({
