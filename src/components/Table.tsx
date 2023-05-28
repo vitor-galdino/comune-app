@@ -1,11 +1,11 @@
 'use client';
-import { UserResponse } from '@/interfaces';
+import { ContactResponse } from '@/interfaces';
 import { Plus, Search } from 'lucide-react';
 import { useState } from 'react';
 import DropdownTools from './DropdownTools';
 
 interface TableProps {
-  response: UserResponse[];
+  response?: ContactResponse[];
 }
 
 export default function Table({ response }: TableProps) {
@@ -66,30 +66,30 @@ export default function Table({ response }: TableProps) {
             </tr>
           </thead>
           <tbody className=''>
-            {response.map((user) => (
-              <tr key={user.id}>
+            {response && response.map((contact) => (
+              <tr key={contact.id}>
                 <td className='border-t border-gray-200 border-dashed'>
                   <span className='flex items-center px-6 py-3 text-gray-700'>
-                    {user.fullName}
+                    {contact.fullName}
                   </span>
                 </td>
                 <td className='border-t border-gray-200 border-dashed'>
                   <span className='flex items-center px-6 py-3 text-gray-700'>
-                    {user.email}
+                    {contact.email}
                   </span>
                 </td>
                 <td className='border-t border-gray-200 border-dashed'>
                   <span className='flex items-center px-6 py-3 text-gray-700'>
-                    {user.phone}
+                    {contact.phone}
                   </span>
                 </td>
                 <td className='border-t border-gray-200 border-dashed'>
                   <span className='flex items-center px-6 py-3 text-gray-700'>
-                    {user.createdAt}
+                    {contact.createdAt}
                   </span>
                 </td>
                 <td className='relative mt-2 mr-4 border-t border-gray-200 border-dashed '>
-                  <DropdownTools user={user} open={open} setOpen={setOpen} />
+                  <DropdownTools contact={contact} open={open} setOpen={setOpen} />
                 </td>
               </tr>
             ))}
