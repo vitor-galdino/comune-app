@@ -16,14 +16,14 @@ export default function Home() {
           </p>
           <Link
             href='/login'
-            className='inline-block px-4 py-3 text-lg font-medium transition-all duration-300 bg-white sm:px-9 text-branding-blue rounded-xl hover:brightness-110 hover:bg-branding-blue/40 hover:text-white'
+            className='inline-block px-4 py-3 text-lg font-medium transition-all duration-300 bg-white border border-white sm:px-9 text-branding-blue rounded-xl hover:brightness-110 hover:bg-branding-blue/40 hover:text-white'
           >
             Entrar
           </Link>
           <span className='mx-4'>ou</span>
           <Link
             href='/register'
-            className='inline-block px-4 py-3 text-lg font-medium transition-all duration-300 bg-white sm:px-9 text-branding-blue rounded-xl hover:brightness-110 hover:bg-branding-blue/40 hover:text-white'
+            className='inline-block px-4 py-3 text-lg font-medium transition-all duration-300 bg-white border border-white sm:px-9 text-branding-blue rounded-xl hover:brightness-110 hover:bg-branding-blue/40 hover:text-white'
           >
             Cadastre-se
           </Link>
