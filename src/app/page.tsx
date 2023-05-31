@@ -1,5 +1,5 @@
+import BrandName from '@/components/BrandName';
 import Link from 'next/link';
-import { kronaOne } from './layout';
 
 export default function Home() {
   return (
@@ -8,7 +8,7 @@ export default function Home() {
       <div className='fixed -z-10 bg-[url("../assets/noise.png")] bg-no-repeat bg-cover bg-fixed h-full w-full' />
       <section className='flex items-center justify-center w-full h-full p-16'>
         <div className='w-[560px] space-y-10 text-white'>
-          <h1 className={`${kronaOne.className} font-extrabold text-6xl -tracking-widest`}>Comune</h1>
+          <BrandName />
           <p className='text-2xl font-normal -tracking-normal'>
             A solução definitiva para organizar seus contatos.
             Com uma interface fácil de usar, o Comune permite que
