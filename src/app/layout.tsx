@@ -1,8 +1,16 @@
 import { Krona_One, Poppins } from 'next/font/google';
 import './globals.css';
 
-const poppins = Poppins({ subsets: ['latin'], weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'] });
-export const kronaOne = Krona_One({ subsets: ['latin'], weight: '400' });
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+  variable: '--font-poppins',
+});
+const kronaOne = Krona_One({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-krona-one'
+});
 
 export const metadata = {
   title: 'Comune App',
@@ -16,7 +24,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-br">
-      <body className={poppins.className}>{children}</body>
+      <body className={`${poppins.variable} ${kronaOne.variable}`}>{children}</body>
     </html>
   );
 }
