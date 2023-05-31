@@ -16,7 +16,7 @@ export default function Register() {
       <div className='overflow-hidden fixed z-10 left-0 w-screen h-20 justify-center rounded-bl-[70px] sm:hidden'>
         <div className='absolute inset-0 z-20 scale-[1.3] bg-[url("../assets/background.png")] bg-no-repeat bg-left bg-fixed bg-cover h-full w-full' />
         <div className='absolute inset-0 z-30 bg-[url("../assets/noise.png")] bg-no-repeat bg-cover bg-center bg-fixed h-full w-full' />
-        <div className='absolute z-40 w-full h-full flex items-center justify-start ml-16'>
+        <div className='absolute z-40 flex items-center justify-start w-full h-full ml-16'>
           <BrandName fontSize='md:text-6xl min-[660px]:text-4xl text-3xl' />
         </div>
       </div>
@@ -25,7 +25,10 @@ export default function Register() {
       ${animate && 'translate-x-[470px] rounded-l-[70px]'}
       `}>
         <div className='absolute inset-0 z-20 scale-[1.3] bg-[url("../assets/background.png")] bg-no-repeat bg-center bg-fixed bg-cover h-full w-full' />
-        <div className='absolute inset-0 z-30 bg-[url("../assets/noise.png")] bg-no-repeat bg-cover bg-center bg-fixed h-full w-full' />
+        <div className={`
+          absolute inset-0 z-30 bg-[url("../assets/noise.png")] bg-no-repeat bg-cover bg-center bg-fixed h-full w-full transition
+          ${animate ? 'opacity-100' : 'opacity-40'}
+        `} />
         <div className={`
           absolute z-40 w-full h-full flex items-center justify-center transition duration-500
           ${animate && '-translate-x-[238px]'}
@@ -34,7 +37,7 @@ export default function Register() {
         </div>
       </div>
       <div className='sm:w-[470px] sm:px-0 container w-screen px-8'>
-        <section className='flex flex-col items-center justify-center h-screen w-full'>
+        <section className='flex flex-col items-center justify-center w-full h-screen'>
           <h2 className='mb-10 text-2xl font-medium'>Bem vindo ao <span className='text-branding-blue'>Comune</span>!</h2>
           <form
             className='flex flex-col w-full sm:w-max'
