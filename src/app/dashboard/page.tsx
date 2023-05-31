@@ -10,11 +10,7 @@ export default function Dashboard() {
   useEffect(() => {
     async function fetchUser() {
       try {
-        const res = await instance.get('/users', {
-          headers: {
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjg1MjkyOTQ5LCJleHAiOjE2ODUzNzkzNDl9.VbCHlclqx82pREHjYVejz8mjUhLZMqnqz6onscfareA'
-          }
-        });
+        const res = await instance.get('/users');
 
         setData(res.data);
         return res.data;
