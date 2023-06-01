@@ -1,13 +1,13 @@
 'use client';
 import { useDashboard } from '@/contexts/DashboardContext';
 import { Download, Plus, Search } from 'lucide-react';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import DropdownTools from './DropdownTools';
 
 export default function Table() {
-  const { userData, handleDownloadPDF } = useDashboard();
-  const [searchQuery, setSearchQuery] = useState<string>('');
+  const { userData, handleDownloadPDF, filterContactNameOnInput, filteredContacts } = useDashboard();
   const [open, setOpen] = useState<number>(0);
+  const contactsData = filteredContacts.length ? filteredContacts : userData?.contacts;
 
   const headings = [
     { key: 'fullName', value: 'Nome' },
@@ -27,8 +27,7 @@ export default function Table() {
               type='text'
               className='w-full py-2 pl-10 pr-4 font-medium text-gray-600 rounded-lg shadow focus:outline-none'
               placeholder='Search...'
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => filterContactNameOnInput(e.target.value)}
             />
             <div className='absolute top-0 bottom-0 left-0 inline-flex items-center p-2 text-gray-400/60'>
               <Search className='w-5 h-5 ' strokeWidth={2.5} />
@@ -71,7 +70,7 @@ export default function Table() {
             </tr>
           </thead>
           <tbody className=''>
-            {userData?.contacts && userData.contacts.map((contact) => (
+            {userData?.contacts && contactsData!.map((contact) => (
               <tr key={contact.id}>
                 <td className='border-t border-gray-200 border-dashed'>
                   <span className='flex items-center px-6 py-3 text-gray-700'>

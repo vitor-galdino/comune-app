@@ -1,5 +1,5 @@
 'use client';
-import { UserAndContactsResponse } from '@/interfaces';
+import { ContactResponse, UserAndContactsResponse } from '@/interfaces';
 import { instance } from '@/services/api';
 import { saveAs } from 'file-saver';
 import Cookies from 'js-cookie';
@@ -13,13 +13,17 @@ interface Props {
 interface DashboardContextData {
   userData: UserAndContactsResponse | undefined;
   setUserData: React.Dispatch<React.SetStateAction<UserAndContactsResponse | undefined>>;
+  filteredContacts: ContactResponse[];
+  setFilteredContacts: React.Dispatch<React.SetStateAction<ContactResponse[]>>;
   handleDownloadPDF: () => Promise<void>;
+  filterContactNameOnInput: (event: string) => void;
 }
 
 const DashboardContext = createContext({} as DashboardContextData);
 
 export function DashboardProvider({ children }: Props) {
   const [userData, setUserData] = useState<UserAndContactsResponse>();
+  const [filteredContacts, setFilteredContacts] = useState<ContactResponse[]>([]);
   const router = useRouter();
 
   useEffect(() => {
@@ -52,11 +56,22 @@ export function DashboardProvider({ children }: Props) {
     }
   }
 
+  function filterContactNameOnInput(inputValue: string) {
+    const searchValue = inputValue.toLowerCase();
+    const filtered = userData?.contacts.filter(({ fullName }) => fullName.toLowerCase().includes(searchValue));
+    if (filtered) {
+      setFilteredContacts([...filtered]);
+    }
+  }
+
   return (
     <DashboardContext.Provider value={{
       userData,
       setUserData,
+      filteredContacts,
+      setFilteredContacts,
       handleDownloadPDF,
+      filterContactNameOnInput,
     }}>
       {children}
     </DashboardContext.Provider>
