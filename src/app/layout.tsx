@@ -24,7 +24,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-br">
-      <body className={`${poppins.variable} ${kronaOne.variable}`}>{children}</body>
+      <body className={`${poppins.variable} ${kronaOne.variable} antialiased`}>{children}</body>
     </html>
   );
 }
