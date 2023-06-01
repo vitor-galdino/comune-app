@@ -20,7 +20,7 @@ export default function Login() {
     setTimeout(() => setAnimate(true), 300);
   }, []);
 
-  async function handleLogin(formData: LoginData) {
+  function handleLogin(formData: LoginData) {
     const res = instance.post('/login', formData)
       .then(({ data }) => {
         setAuthToken(data.token);
