@@ -1,37 +1,13 @@
 'use client';
-import { ContactResponse } from '@/interfaces';
-import { instance } from '@/services/api';
-import { saveAs } from 'file-saver';
+import { useDashboard } from '@/contexts/DashboardContext';
 import { Download, Plus, Search } from 'lucide-react';
 import { useState } from 'react';
 import DropdownTools from './DropdownTools';
 
-interface TableProps {
-  response?: ContactResponse[];
-}
-
-export default function Table({ response }: TableProps) {
+export default function Table() {
+  const { userData, handleDownloadPDF } = useDashboard();
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [open, setOpen] = useState<number>(0);
-
-  async function handleDownloadPDF() {
-    try {
-      const res = await instance.get('/reports', {
-        responseType: 'blob'
-      });
-
-      const date = new Date();
-      const formattedDateTime = date.toLocaleString('pt-BR')
-        .replaceAll('/', '-')
-        .split(',')[0];
-      const fileName = `relatorio_${formattedDateTime}`;
-      saveAs(res.data, fileName);
-
-    } catch (err) {
-      console.error(err);
-      throw new Error('Error');
-    }
-  }
 
   const headings = [
     { key: 'fullName', value: 'Nome' },
@@ -95,7 +71,7 @@ export default function Table({ response }: TableProps) {
             </tr>
           </thead>
           <tbody className=''>
-            {response && response.map((contact) => (
+            {userData?.contacts && userData.contacts.map((contact) => (
               <tr key={contact.id}>
                 <td className='border-t border-gray-200 border-dashed'>
                   <span className='flex items-center px-6 py-3 text-gray-700'>
