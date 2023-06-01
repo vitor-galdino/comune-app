@@ -51,8 +51,8 @@ export default function DropdownTools({ contact, open, setOpen }: DropdownToolsP
           setOpen(open == contact.id ? 0 : contact.id);
         }}
         className={
-          `flex items-center justify-center p-2 rounded-full w-9 h-9 hover:bg-gray-200/40 hover:text-blue-500 
-           ${open == contact.id ? 'text-blue-500 bg-gray-200/40' : 'text-gray-700'}`
+          `flex items-center justify-center p-2 rounded-full w-9 h-9 hover:bg-gray-200/40 
+           ${open == contact.id ? 'text-branding-blue bg-gray-200/40' : 'text-gray-700 hover:text-branding-blue'}`
         }
         id='dropdownButton'
       >
