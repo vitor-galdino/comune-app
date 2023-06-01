@@ -1,5 +1,6 @@
 'use client';
 import BrandName from '@/components/BrandName';
+import Input from '@/components/Input';
 import { instance, setAuthToken } from '@/services/api';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
@@ -69,28 +70,26 @@ export default function Login() {
             <h2 className='mb-10 text-2xl font-medium'>Bem vindo de volta ao <span className='text-branding-blue'>Comune</span>!</h2>
             <form
               noValidate
-              className='flex flex-col w-full sm:w-max'
+              className='flex flex-col gap-4 w-full sm:w-max'
               onSubmit={handleSubmit(handleLogin)}
             >
-              <label htmlFor="email" className='font-normal text-gray-700'>E-mail</label>
-              <input
-                className='outline-none max-w-[95%] sm:w-80 w-full text-base pb-1 border-b-2 border-gray-200 focus:border-branding-blue hover:border-branding-blue'
-                type="email"
-                id="email"
+              <Input
+                type='email'
                 placeholder='Digite seu e-mail...'
-                {...register('email')}
+                label='E-mail'
+                id='email'
+                register={register('email')}
+                error={errors.email}
               />
-              {!!errors.email && <span className='mt-2 text-sm text-red-500'>{errors.email.message}</span>}
-              <label htmlFor="password" className='mt-4 font-normal text-gray-700'>Senha</label>
-              <input
-                className='outline-none max-w-[95%] sm:w-80 w-full text-base pb-1 border-b-2 border-gray-200 focus:border-branding-blue hover:border-branding-blue'
-                type="password"
-                id="password"
+              <Input
+                type='password'
                 placeholder='Digite sua senha...'
-                {...register('password')}
+                label='Senha'
+                id='password'
+                register={register('password')}
+                error={errors.password}
               />
-              {!!errors.password && <span className='mt-2 text-sm text-red-500'>{errors.password.message}</span>}
-              <button type="submit" className='h-10 mt-4 mb-4 font-medium text-white transition-all duration-300 border bg-branding-blue rounded-xl hover:bg-white hover:text-branding-blue hover:border-branding-blue'>Entrar</button>
+              <button type="submit" className='h-10 mb-4 font-medium text-white transition-all duration-300 border bg-branding-blue rounded-xl hover:bg-white hover:text-branding-blue hover:border-branding-blue'>Entrar</button>
             </form>
             <span>Ainda não tem uma conta? <Link href='/register' className='text-branding-blue hover:underline decoration-branding-blue'>Cadastra-se</Link></span>
           </section>
