@@ -9,7 +9,7 @@ export const instance = axios.create({
 export function setAuthToken(token: string) {
   if (token) {
     instance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    Cookies.set('token', token, { secure: true });
+    Cookies.set('token', token, { secure: true, expires: 1 });
   } else {
     delete instance.defaults.headers.common['Authorization'];
     Cookies.remove('token');
