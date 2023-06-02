@@ -49,7 +49,7 @@ export default function ModalCreateContact() {
 
   return (
     <div ref={modalRef} className='absolute z-[999] top-0 w-screen h-screen bg-black/10 backdrop-blur-[1px] grid place-items-center'>
-      <section className='container relative w-11/12 h-auto p-5 bg-white rounded-lg shadow-lg max-w-max'>
+      <section className='container relative max-w-[358px] w-11/12 h-auto p-5 bg-white rounded-lg shadow-lg'>
         <header className='absolute top-0 left-0 right-0 flex justify-between w-full h-4 p-5'>
           <h3 className='text-lg font-semibold text-gray-900'>Adicionar novo contato</h3>
           <button
