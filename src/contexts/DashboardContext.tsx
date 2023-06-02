@@ -13,8 +13,12 @@ interface Props {
 interface DashboardContextData {
   userData: UserAndContactsResponse | undefined;
   setUserData: React.Dispatch<React.SetStateAction<UserAndContactsResponse | undefined>>;
+  contactsData: ContactResponse[];
+  setContactsData: React.Dispatch<React.SetStateAction<ContactResponse[]>>;
   filteredContacts: ContactResponse[];
   setFilteredContacts: React.Dispatch<React.SetStateAction<ContactResponse[]>>;
+  showModalCreateContact: boolean;
+  setShowModalCreateContact: React.Dispatch<React.SetStateAction<boolean>>;
   handleDownloadPDF: () => Promise<void>;
   filterContactNameOnInput: (event: string) => void;
 }
@@ -23,12 +27,17 @@ const DashboardContext = createContext({} as DashboardContextData);
 
 export function DashboardProvider({ children }: Props) {
   const [userData, setUserData] = useState<UserAndContactsResponse>();
+  const [contactsData, setContactsData] = useState<ContactResponse[]>([]);
   const [filteredContacts, setFilteredContacts] = useState<ContactResponse[]>([]);
+  const [showModalCreateContact, setShowModalCreateContact] = useState<boolean>(false);
   const router = useRouter();
 
   useEffect(() => {
-    instance.get('/users')
-      .then(res => setUserData(res.data))
+    instance.get<UserAndContactsResponse>('/users')
+      .then(({ data }) => {
+        setContactsData(data.contacts);
+        setUserData(data);
+      })
       .catch(err => {
         if (err.response.status === 401) {
           Cookies.remove('token');
@@ -68,8 +77,12 @@ export function DashboardProvider({ children }: Props) {
     <DashboardContext.Provider value={{
       userData,
       setUserData,
+      contactsData,
+      setContactsData,
       filteredContacts,
       setFilteredContacts,
+      showModalCreateContact,
+      setShowModalCreateContact,
       handleDownloadPDF,
       filterContactNameOnInput,
     }}>
