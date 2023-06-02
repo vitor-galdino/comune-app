@@ -2,8 +2,8 @@
 import { ContactResponse, UserAndContactsResponse } from '@/interfaces';
 import { instance } from '@/services/api';
 import { saveAs } from 'file-saver';
-import Cookies from 'js-cookie';
-import { useRouter } from 'next/navigation';
+import { redirect } from 'next/navigation';
+import nookies, { parseCookies } from 'nookies';
 import { ReactNode, createContext, useContext, useEffect, useState } from 'react';
 
 interface Props {
@@ -30,7 +30,11 @@ export function DashboardProvider({ children }: Props) {
   const [contactsData, setContactsData] = useState<ContactResponse[]>([]);
   const [filteredContacts, setFilteredContacts] = useState<ContactResponse[]>([]);
   const [showModalCreateContact, setShowModalCreateContact] = useState<boolean>(false);
-  const router = useRouter();
+
+  useEffect(() => {
+    const { token } = parseCookies();
+    if (!token) redirect('/');
+  }, []);
 
   useEffect(() => {
     instance.get<UserAndContactsResponse>('/users')
@@ -40,8 +44,8 @@ export function DashboardProvider({ children }: Props) {
       })
       .catch(err => {
         if (err.response.status === 401) {
-          Cookies.remove('token');
-          router.push('/');
+          nookies.destroy(null, 'token');
+          redirect('/login');
         }
         throw err;
       });
