@@ -5,9 +5,18 @@ import { ChangeEvent, useState } from 'react';
 import { Toaster } from 'sonner';
 import DropdownTools from './DropdownTools';
 import ModalCreateContact from './ModalCreateContact';
+import ModalEditContact from './ModalEditContact';
 
 export default function Table() {
-  const { contactsData, handleDownloadPDF, filterContactNameOnInput, filteredContacts, setShowModalCreateContact, showModalCreateContact } = useDashboard();
+  const {
+    contactsData,
+    handleDownloadPDF,
+    filterContactNameOnInput,
+    filteredContacts,
+    setShowModalCreateContact,
+    showModalCreateContact,
+    showModalEditContact,
+  } = useDashboard();
   const [open, setOpen] = useState<number>(0);
   const currentContacts = filteredContacts.length ? filteredContacts : contactsData;
 
@@ -107,6 +116,7 @@ export default function Table() {
         </div>
       </div>
       {showModalCreateContact && <ModalCreateContact />}
+      {showModalEditContact && <ModalEditContact />}
     </>
   );
 }
