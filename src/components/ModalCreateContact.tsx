@@ -67,7 +67,7 @@ export default function ModalCreateContact() {
         >
           <Input
             type='text'
-            placeholder='Digite seu nome...'
+            placeholder='Insira o nome...'
             label='Nome'
             id='name'
             register={register('fullName')}
@@ -75,7 +75,7 @@ export default function ModalCreateContact() {
           />
           <Input
             type='email'
-            placeholder='Digite seu e-mail...'
+            placeholder='Insira o e-mail...'
             label='E-mail'
             id='email'
             register={register('email')}
@@ -83,7 +83,7 @@ export default function ModalCreateContact() {
           />
           <Input
             type='text'
-            placeholder='Digite seu número de telefone...'
+            placeholder='Insira o número de telefone...'
             label='Número de telefone'
             id='phone'
             register={register('phone')}
