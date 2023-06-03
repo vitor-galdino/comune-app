@@ -32,7 +32,6 @@ export default function ModalDeleteContact() {
         throw err;
       });
 
-    console.log(showModalDeleteContact);
     toast.promise(res, {
       loading: 'Loading...',
       success: 'Contato deletado com sucesso!',
