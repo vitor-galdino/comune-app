@@ -11,7 +11,7 @@ interface DropdownToolsProps {
 }
 
 export default function DropdownTools({ contact, open, setOpen }: DropdownToolsProps) {
-  const { setShowModalEditContact } = useDashboard();
+  const { setShowModalEditContact, setShowModalDeleteContact } = useDashboard();
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [dropdownPosition, setDropdownPosition] = useState<{ top: number; left: number; }>({ top: 0, left: 0 });
 
@@ -91,7 +91,10 @@ export default function DropdownTools({ contact, open, setOpen }: DropdownToolsP
             </div>
             <div className='absolute bottom-0 left-0 right-0 w-11/12 h-px mx-auto bg-gray-300 rounded-full'></div>
           </label>
-          <label className='relative flex items-center justify-start px-4 py-2 cursor-pointer hover:bg-red-100/40 text-red-500/90'>
+          <label
+            onClick={() => setShowModalDeleteContact(contact.id)}
+            className='relative flex items-center justify-start px-4 py-2 cursor-pointer hover:bg-red-100/40 text-red-500/90'
+          >
             <div className='flex items-center gap-3 select-none'>
               <Trash strokeWidth={1.5} className='w-5 h-5 text-red-500/80' />
               Deletar
