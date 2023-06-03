@@ -105,7 +105,13 @@ export default function Table() {
                   </td>
                   <td className='border-t border-gray-200 border-dashed'>
                     <span className='flex items-center px-6 py-3 text-gray-700'>
-                      {contact.createdAt}
+                      {new Date(contact.createdAt).toLocaleDateString('pt-BR', {
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: 'numeric',
+                        timeZone: 'UTC',
+                      })
+                      }
                     </span>
                   </td>
                   <td className='relative mt-2 mr-4 border-t border-gray-200 border-dashed '>
