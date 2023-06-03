@@ -21,6 +21,8 @@ export interface ContactResponse extends Contact {
   createdAt: string;
 }
 
+export type OptionalContact = Partial<Contact>;
+
 export interface UserAndContactsResponse extends UserResponse {
   contacts: ContactResponse[];
 }
