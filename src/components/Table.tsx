@@ -8,6 +8,7 @@ import DropdownUserTools from './DropdownUserTools';
 import ModalCreateContact from './ModalCreateContact';
 import ModalDeleteContact from './ModalDeleteContact';
 import ModalEditContact from './ModalEditContact';
+import ModalUserTools from './ModalUserTools';
 
 export default function Table() {
   const {
@@ -20,6 +21,7 @@ export default function Table() {
     showModalCreateContact,
     showModalEditContact,
     showModalDeleteContact,
+    showModalUserTools,
   } = useDashboard();
   const [dropdownTools, setDropdownTools] = useState<number>(0);
   const [dropdownUserTools, setDropdownUserTools] = useState<boolean>(false);
@@ -145,6 +147,7 @@ export default function Table() {
       {showModalCreateContact && <ModalCreateContact />}
       {!!showModalEditContact && <ModalEditContact />}
       {!!showModalDeleteContact && <ModalDeleteContact />}
+      {showModalUserTools && <ModalUserTools />}
     </>
   );
 }
