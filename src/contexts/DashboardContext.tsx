@@ -23,6 +23,8 @@ interface DashboardContextData {
   setShowModalEditContact: React.Dispatch<React.SetStateAction<number>>;
   showModalDeleteContact: number;
   setShowModalDeleteContact: React.Dispatch<React.SetStateAction<number>>;
+  showModalUserTools: boolean;
+  setShowModalUserTools: React.Dispatch<React.SetStateAction<boolean>>;
   handleDownloadPDF: () => Promise<void>;
   filterContactNameOnInput: (event: string) => void;
 }
@@ -36,6 +38,7 @@ export function DashboardProvider({ children }: Props) {
   const [showModalCreateContact, setShowModalCreateContact] = useState<boolean>(false);
   const [showModalEditContact, setShowModalEditContact] = useState<number>(0);
   const [showModalDeleteContact, setShowModalDeleteContact] = useState<number>(0);
+  const [showModalUserTools, setShowModalUserTools] = useState<boolean>(false);
 
   useEffect(() => {
     const { token } = parseCookies();
@@ -97,6 +100,8 @@ export function DashboardProvider({ children }: Props) {
       setShowModalEditContact,
       showModalDeleteContact,
       setShowModalDeleteContact,
+      showModalUserTools,
+      setShowModalUserTools,
       handleDownloadPDF,
       filterContactNameOnInput,
     }}>
