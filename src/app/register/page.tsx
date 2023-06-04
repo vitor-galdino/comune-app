@@ -4,7 +4,8 @@ import Input from '@/components/Input';
 import { instance } from '@/services/api';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
+import { parseCookies } from 'nookies';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Toaster, toast } from 'sonner';
@@ -16,6 +17,11 @@ export default function Register() {
   });
   const [animate, setAnimate] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    const { token } = parseCookies();
+    if (token) redirect('/dashboard');
+  }, []);
 
   useEffect(() => {
     setTimeout(() => setAnimate(true), 300);
@@ -64,7 +70,7 @@ export default function Register() {
         </div>
         <div className='sm:w-[470px] sm:px-0 container w-screen px-8'>
           <section className='flex flex-col items-center justify-center w-full h-screen'>
-            <h2 className='mb-10 text-2xl font-medium'>Bem vindo ao <span className='text-branding-blue'>Comune</span>!</h2>
+            <h2 className='mb-10 text-xl font-medium'>Bem vindo ao <span className='text-branding-blue'>Comune</span>!</h2>
             <form
               noValidate
               className='flex flex-col gap-4 w-full sm:w-max'

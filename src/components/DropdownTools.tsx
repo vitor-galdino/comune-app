@@ -1,4 +1,5 @@
 'use client';
+import { useDashboard } from '@/contexts/DashboardContext';
 import { ContactResponse } from '@/interfaces';
 import { Edit2, Mail, MoreVertical, Phone, Trash } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
@@ -10,6 +11,7 @@ interface DropdownToolsProps {
 }
 
 export default function DropdownTools({ contact, open, setOpen }: DropdownToolsProps) {
+  const { setShowModalEditContact, setShowModalDeleteContact } = useDashboard();
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [dropdownPosition, setDropdownPosition] = useState<{ top: number; left: number; }>({ top: 0, left: 0 });
 
@@ -79,14 +81,20 @@ export default function DropdownTools({ contact, open, setOpen }: DropdownToolsP
             </div>
             <div className='absolute bottom-0 left-0 right-0 w-11/12 h-px mx-auto bg-gray-300 rounded-full'></div>
           </a>
-          <label className='relative flex items-center justify-start px-4 py-2 text-gray-700 cursor-pointer decoration-clone hover:bg-gray-100/60'>
+          <label
+            onClick={() => setShowModalEditContact(contact.id)}
+            className='relative flex items-center justify-start px-4 py-2 text-gray-700 cursor-pointer decoration-clone hover:bg-gray-100/60'
+          >
             <div className='flex items-center gap-3 select-none'>
               <Edit2 strokeWidth={1.5} className='w-5 h-5 text-gray-700/90' />
               Editar
             </div>
             <div className='absolute bottom-0 left-0 right-0 w-11/12 h-px mx-auto bg-gray-300 rounded-full'></div>
           </label>
-          <label className='relative flex items-center justify-start px-4 py-2 cursor-pointer hover:bg-red-100/40 text-red-500/90'>
+          <label
+            onClick={() => setShowModalDeleteContact(contact.id)}
+            className='relative flex items-center justify-start px-4 py-2 cursor-pointer hover:bg-red-100/40 text-red-500/90'
+          >
             <div className='flex items-center gap-3 select-none'>
               <Trash strokeWidth={1.5} className='w-5 h-5 text-red-500/80' />
               Deletar

@@ -2,8 +2,8 @@
 import { ContactResponse, UserAndContactsResponse } from '@/interfaces';
 import { instance } from '@/services/api';
 import { saveAs } from 'file-saver';
-import Cookies from 'js-cookie';
-import { useRouter } from 'next/navigation';
+import { redirect } from 'next/navigation';
+import nookies, { parseCookies } from 'nookies';
 import { ReactNode, createContext, useContext, useEffect, useState } from 'react';
 
 interface Props {
@@ -19,6 +19,14 @@ interface DashboardContextData {
   setFilteredContacts: React.Dispatch<React.SetStateAction<ContactResponse[]>>;
   showModalCreateContact: boolean;
   setShowModalCreateContact: React.Dispatch<React.SetStateAction<boolean>>;
+  showModalEditContact: number;
+  setShowModalEditContact: React.Dispatch<React.SetStateAction<number>>;
+  showModalDeleteContact: number;
+  setShowModalDeleteContact: React.Dispatch<React.SetStateAction<number>>;
+  showModalUserTools: boolean;
+  setShowModalUserTools: React.Dispatch<React.SetStateAction<boolean>>;
+  showModalUserDelete: boolean;
+  setShowModalUserDelete: React.Dispatch<React.SetStateAction<boolean>>;
   handleDownloadPDF: () => Promise<void>;
   filterContactNameOnInput: (event: string) => void;
 }
@@ -30,7 +38,15 @@ export function DashboardProvider({ children }: Props) {
   const [contactsData, setContactsData] = useState<ContactResponse[]>([]);
   const [filteredContacts, setFilteredContacts] = useState<ContactResponse[]>([]);
   const [showModalCreateContact, setShowModalCreateContact] = useState<boolean>(false);
-  const router = useRouter();
+  const [showModalEditContact, setShowModalEditContact] = useState<number>(0);
+  const [showModalDeleteContact, setShowModalDeleteContact] = useState<number>(0);
+  const [showModalUserTools, setShowModalUserTools] = useState<boolean>(false);
+  const [showModalUserDelete, setShowModalUserDelete] = useState<boolean>(false);
+
+  useEffect(() => {
+    const { token } = parseCookies();
+    if (!token) redirect('/');
+  }, []);
 
   useEffect(() => {
     instance.get<UserAndContactsResponse>('/users')
@@ -40,8 +56,8 @@ export function DashboardProvider({ children }: Props) {
       })
       .catch(err => {
         if (err.response.status === 401) {
-          Cookies.remove('token');
-          router.push('/');
+          nookies.destroy(null, 'token');
+          redirect('/login');
         }
         throw err;
       });
@@ -83,6 +99,14 @@ export function DashboardProvider({ children }: Props) {
       setFilteredContacts,
       showModalCreateContact,
       setShowModalCreateContact,
+      showModalEditContact,
+      setShowModalEditContact,
+      showModalDeleteContact,
+      setShowModalDeleteContact,
+      showModalUserTools,
+      setShowModalUserTools,
+      showModalUserDelete,
+      setShowModalUserDelete,
       handleDownloadPDF,
       filterContactNameOnInput,
     }}>

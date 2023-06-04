@@ -1,22 +1,25 @@
 import axios from 'axios';
-import Cookies from 'js-cookie';
+import nookies from 'nookies';
 
 export const instance = axios.create({
   baseURL: 'http://localhost:3000',
   timeout: 15000,
 });
 
-export function setAuthToken(token: string) {
+export function setAuthToken(token: string | null) {
   if (token) {
+    const hasToken = nookies.get().token;
+    if (!hasToken) {
+      nookies.set(null, 'token', token, { secure: true, maxAge: 60 * 60 * 24 });
+    }
     instance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    Cookies.set('token', token, { secure: true });
   } else {
     delete instance.defaults.headers.common['Authorization'];
-    Cookies.remove('token');
+    nookies.destroy(null, 'token');
   }
 }
 
-const token = Cookies.get('token');
+const token = nookies.get().token;
 if (token) {
   setAuthToken(token);
 }

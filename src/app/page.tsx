@@ -7,9 +7,9 @@ export default function Home() {
       <div className='fixed -z-20 bg-[url("../assets/background.png")] bg-no-repeat bg-cover bg-center bg-fixed h-screen w-screen transition duration-500 scale-[1.3]' />
       <div className='fixed -z-10 bg-[url("../assets/noise.png")] bg-no-repeat bg-cover bg-fixed h-full w-full' />
       <section className='flex items-center justify-center w-full h-full p-16'>
-        <div className='w-[560px] space-y-10 text-white'>
+        <div className='w-[550px] space-y-10 text-white'>
           <BrandName />
-          <p className='text-2xl font-normal -tracking-normal'>
+          <p className='text-xl font-normal -tracking-normal'>
             A solução definitiva para organizar seus contatos.
             Com uma interface fácil de usar, o Comune permite que
             você gerencie seus contatos com eficiência e praticidade.
