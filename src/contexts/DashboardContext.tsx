@@ -80,6 +80,7 @@ export function DashboardProvider({ children }: Props) {
       throw err;
     }
   }
+  console.log('test');
 
   function filterContactNameOnInput(inputValue: string) {
     console.log(inputValue);
