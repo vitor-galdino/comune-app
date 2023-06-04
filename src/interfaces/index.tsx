@@ -10,6 +10,8 @@ export interface UserResponse extends Omit<User, 'password'> {
   createdAt: string;
 }
 
+export type OptionalUser = Partial<User>;
+
 export interface Contact {
   fullName: string;
   email: string;
