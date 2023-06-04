@@ -4,7 +4,8 @@ import Input from '@/components/Input';
 import { instance } from '@/services/api';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
+import { parseCookies } from 'nookies';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Toaster, toast } from 'sonner';
@@ -16,6 +17,11 @@ export default function Register() {
   });
   const [animate, setAnimate] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    const { token } = parseCookies();
+    if (token) redirect('/dashboard');
+  }, []);
 
   useEffect(() => {
     setTimeout(() => setAnimate(true), 300);
