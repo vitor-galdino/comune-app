@@ -64,7 +64,7 @@ export default function Register() {
         </div>
         <div className='sm:w-[470px] sm:px-0 container w-screen px-8'>
           <section className='flex flex-col items-center justify-center w-full h-screen'>
-            <h2 className='mb-10 text-2xl font-medium'>Bem vindo ao <span className='text-branding-blue'>Comune</span>!</h2>
+            <h2 className='mb-10 text-xl font-medium'>Bem vindo ao <span className='text-branding-blue'>Comune</span>!</h2>
             <form
               noValidate
               className='flex flex-col gap-4 w-full sm:w-max'
