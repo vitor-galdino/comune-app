@@ -10,7 +10,7 @@ interface DropdownUserToolsProps {
 }
 
 export default function DropdownUserTools({ setOpen }: DropdownUserToolsProps) {
-  const { } = useDashboard();
+  const { setShowModalUserTools } = useDashboard();
   const dropdownRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
@@ -38,6 +38,7 @@ export default function DropdownUserTools({ setOpen }: DropdownUserToolsProps) {
     >
       <label
         className='relative flex items-center justify-start px-4 py-2 text-gray-700 cursor-pointer decoration-clone hover:bg-gray-100/60'
+        onClick={() => setShowModalUserTools(true)}
       >
         <div className='flex items-center gap-3 select-none'>
           <User2 strokeWidth={1.5} className='w-5 h-5 text-gray-700/90' />
