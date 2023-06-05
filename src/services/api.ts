@@ -2,7 +2,7 @@ import axios from 'axios';
 import nookies from 'nookies';
 
 export const instance = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: 'https://comune-server-production.up.railway.app',
   timeout: 15000,
 });
 
