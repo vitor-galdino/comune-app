@@ -114,7 +114,7 @@ export default function ModalUserTools() {
           <div className='flex gap-3'>
             <button
               type="button"
-              className='h-10 mt-2 w-2/4 font-medium text-white transition-all duration-300 bg-red-600 border rounded-xl hover:bg-white hover:text-red-600 hover:border-red-600'
+              className='h-10 mt-2 w-2/4 font-medium hover:text-white transition-all duration-300 hover:bg-red-600 border rounded-xl bg-white text-red-600 border-red-600'
               onClick={() => {
                 setShowModalUserTools(false);
                 setShowModalUserDelete(true);
