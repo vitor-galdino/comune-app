@@ -27,6 +27,7 @@ export const editUserSchema = z.object({
     ),
   phone: z.string()
     .max(14, 'O número ultrapassou o limite de 14 caracteres')
+    .regex(/^\d{2} \d{5}-\d{4}$/, 'Número de telefone inválido')
     .optional(),
 }).transform((obj) => {
   const newObj: { [key: string]: string | undefined; } = { ...obj };
