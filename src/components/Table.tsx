@@ -42,8 +42,8 @@ export default function Table() {
   return (
     <>
       <Toaster />
-      <div className='fixed z-[9999] left-0 right-0 top-0 w-full h-20 justify-center rounded-bl-[70px]'>
-        <div className='overflow-hidden absolute w-full h-full rounded-bl-[70px] justify-center'>
+      <div className='fixed z-[9999] left-0 right-0 top-0 w-full h-20 justify-center rounded-bl-[40px]'>
+        <div className='overflow-hidden absolute w-full h-full rounded-bl-[40px] justify-center'>
           <div className='absolute inset-0 z-20 scale-[1.3] bg-[url("../assets/background.png")] bg-no-repeat bg-left bg-fixed bg-cover h-full w-full' />
           <div className='absolute inset-0 z-30 bg-[url("../assets/noise.png")] bg-no-repeat bg-cover bg-center bg-fixed h-full w-full' />
         </div>
@@ -52,13 +52,13 @@ export default function Table() {
           <div className='relative flex items-end mt-3'>
             <button
               onClick={() => setDropdownUserTools(!dropdownUserTools)}
-              className='flex items-end justify-center gap-1 bg-branding-blue/30 py-[2px] px-[3px] rounded-full transition duration-300 focus:bg-branding-blue/50 hover:bg-branding-blue/50'
+              className='flex items-end justify-center gap-1 bg-branding-blue/30 py-[2px] px-[3px] rounded-xl transition duration-300 focus:bg-branding-blue/50 hover:bg-branding-blue/50'
               id='dropdownButton'
             >
-              <span id='dropdownButton' className='text-white self-center  sm:mr-1'>
+              <span id='dropdownButton' className='self-center text-white sm:mr-1'>
                 <UserCircle2 id='dropdownButton' size={25} />
               </span>
-              <span id='dropdownButton' className='font-medium text-white text-stroke hidden sm:block'>{userData?.fullName}</span>
+              <span id='dropdownButton' className='hidden font-medium text-white text-stroke sm:block'>{userData?.fullName}</span>
               <span id='dropdownButton' className={`text-white mb-[1.5px] ${dropdownUserTools ? 'rotate-180' : 'rotate-0'} transition ease-out duration-300`}>
                 <ChevronDown id='dropdownButton' size={20} strokeWidth={2.75} />
               </span>
@@ -73,7 +73,7 @@ export default function Table() {
             <div className='relative md:w-1/3 group'>
               <input
                 type='text'
-                className='w-full py-2 pl-10 pr-4 rounded-lg shadow focus:outline-none '
+                className='w-full py-2 pb-1 pl-10 pr-2 text-base border-b-2 border-gray-200 focus:outline-none focus:border-branding-blue hover:border-branding-blue'
                 placeholder='Pesquisar contato...'
                 onChange={(e: ChangeEvent<HTMLInputElement>) => filterContactNameOnInput(e.target.value)}
               />
@@ -86,7 +86,7 @@ export default function Table() {
             <div className='flex gap-3 rounded-lg'>
               <div>
                 <button onClick={handleDownloadPDF}
-                  className='flex items-center gap-2 px-2 py-2 font-medium text-gray-500 bg-white rounded-lg shadow hover:text-branding-blue md:px-4'
+                  className='flex items-center gap-2 px-2 py-2 font-medium text-gray-500 bg-white border-b-2 border-gray-200 hover:border-branding-blue hover:text-branding-blue md:px-4'
                 >
                   <Download className='w-5 h-5' strokeWidth={2.5} />
                   <span className='hidden md:block'>Relatório</span>
@@ -94,7 +94,7 @@ export default function Table() {
               </div>
               <div>
                 <button
-                  className='flex items-center gap-1 px-2 py-2 font-medium text-gray-500 bg-white rounded-lg shadow hover:text-branding-blue md:px-4'
+                  className='flex items-center gap-1 px-2 py-2 font-medium text-gray-500 bg-white border-b-2 border-gray-200 hover:border-branding-blue hover:text-branding-blue md:px-4'
                   onClick={() => setShowModalCreateContact(true)}
                 >
                   <Plus className='w-5 h-5' strokeWidth={2.5} />
