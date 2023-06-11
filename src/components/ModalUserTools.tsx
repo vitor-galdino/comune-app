@@ -102,7 +102,7 @@ export default function ModalUserTools() {
             error={errors.password}
           />
           <Input
-            type='text'
+            type='tel'
             placeholder='Insira um novo número de telefone...'
             label='Número de telefone'
             id='phone'
