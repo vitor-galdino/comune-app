@@ -42,7 +42,7 @@ export default function Table() {
   return (
     <>
       <Toaster />
-      <div className='fixed z-[9999] left-0 right-0 top-0 w-full h-20 justify-center rounded-bl-[40px]'>
+      <div className='fixed z-40 left-0 right-0 top-0 w-full h-20 justify-center rounded-bl-[40px]'>
         <div className='overflow-hidden absolute w-full h-full rounded-bl-[40px] justify-center'>
           <div className='absolute inset-0 z-20 scale-[1.3] bg-[url("../assets/background.png")] bg-no-repeat bg-left bg-fixed bg-cover h-full w-full' />
           <div className='absolute inset-0 z-30 bg-[url("../assets/noise.png")] bg-no-repeat bg-cover bg-center bg-fixed h-full w-full' />
@@ -104,14 +104,14 @@ export default function Table() {
             </div>
           </div>
         </div>
-        <div className='relative overflow-x-auto overflow-y-auto bg-white rounded-lg shadow' style={{ height: '405px' }}>
-          <table className='relative w-full whitespace-no-wrap bg-white border-collapse table-auto table-striped'>
+        <div className='relative overflow-x-auto overflow-y-auto bg-white rounded-lg shadow-lg shadow-gray-300 border border-gray-200 h-[408px]'>
+          <table className='relative w-full whitespace-no-wrap bg-gray-100 border-collapse table-auto table-striped'>
             <thead>
               <tr className='text-left'>
                 {headings.map((heading) => (
                   <th
                     key={heading.key}
-                    className={`bg-gray-100 sticky top-0 z-50 border-b border-gray-200 px-6 py-4 text-gray-600 font-bold tracking-wider uppercase text-xs`}
+                    className={`bg-gray-200 sticky top-0 z-50 border-b border-gray-200  px-6 py-4 text-gray-500 font-bold tracking-wider uppercase text-xs`}
                   >
                     {heading.value}
                   </th>
@@ -121,22 +121,22 @@ export default function Table() {
             <tbody className=''>
               {contactsData && currentContacts!.map((contact) => (
                 <tr key={contact.id}>
-                  <td className='border-t border-gray-200 border-dashed'>
+                  <td className='border-t border-gray-300 border-dashed'>
                     <span className='flex items-center px-6 py-3 text-gray-700'>
                       {contact.fullName}
                     </span>
                   </td>
-                  <td className='border-t border-gray-200 border-dashed'>
+                  <td className='border-t border-gray-300 border-dashed'>
                     <span className='flex items-center px-6 py-3 text-gray-700'>
                       {contact.email}
                     </span>
                   </td>
-                  <td className='border-t border-gray-200 border-dashed'>
+                  <td className='border-t border-gray-300 border-dashed'>
                     <span className='flex items-center px-6 py-3 text-gray-700'>
                       {contact.phone}
                     </span>
                   </td>
-                  <td className='border-t border-gray-200 border-dashed'>
+                  <td className='border-t border-gray-300 border-dashed'>
                     <span className='flex items-center px-6 py-3 text-gray-700'>
                       {new Date(contact.createdAt).toLocaleDateString('pt-BR', {
                         day: '2-digit',
@@ -147,7 +147,7 @@ export default function Table() {
                       }
                     </span>
                   </td>
-                  <td className='relative mt-2 mr-4 border-t border-gray-200 border-dashed '>
+                  <td className='relative mt-2 mr-4 border-t border-gray-300 border-dashed '>
                     <DropdownTools contact={contact} open={dropdownTools} setOpen={setDropdownTools} />
                   </td>
                 </tr>
