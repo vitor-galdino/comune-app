@@ -20,6 +20,7 @@ export const registerSchema = z.object({
   phone: z.string()
     .nonempty('Campo obrigatório')
     .max(14, 'O número ultrapassou o limite de 14 caracteres')
+    .regex(/^\d{2} \d{5}-\d{4}$/, 'Número de telefone inválido'),
 })
   .refine((data) => data.password === data.confirmPassword, {
     message: 'As senhas não correspondem',
