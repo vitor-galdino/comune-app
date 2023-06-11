@@ -4,13 +4,14 @@ import InputMask from 'react-input-mask';
 interface InputProps {
   type: 'text' | 'email' | 'password' | 'number' | 'tel';
   placeholder: string;
+  defaultValue?: string;
   label?: string;
   id: string;
   register?: UseFormRegisterReturn;
   error?: FieldError;
 }
 
-export default function Input({ type, placeholder, label, id, register, error }: InputProps) {
+export default function Input({ type, placeholder, defaultValue, label, id, register, error }: InputProps) {
   const inputClassName = `outline-none max-w-[95%] sm:w-80 w-full text-base pb-1 border-b-2 ${!!error && 'border-red-400 hover:border-red-400'} border-gray-200 focus:border-branding-blue hover:border-branding-blue`;
 
   return (
@@ -20,6 +21,7 @@ export default function Input({ type, placeholder, label, id, register, error }:
         <InputMask
           mask='99 99999-9999'
           className={inputClassName}
+          defaultValue={defaultValue}
           type={type}
           id={id}
           placeholder={placeholder}
