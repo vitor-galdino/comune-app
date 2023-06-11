@@ -28,6 +28,7 @@ export default function Register() {
   }, []);
 
   function handleRegister(formData: RegisterData) {
+    delete formData.confirmPassword;
     const res = instance.post('/users', formData)
       .then(() => router.push('/login'))
       .catch(err => {
@@ -99,6 +100,14 @@ export default function Register() {
                 id='password'
                 register={register('password')}
                 error={errors.password}
+              />
+              <Input
+                type='password'
+                placeholder='Digite sua senha novamente...'
+                label='Confirmar Senha'
+                id='confirmPassword'
+                register={register('confirmPassword')}
+                error={errors.confirmPassword}
               />
               <Input
                 type='text'
