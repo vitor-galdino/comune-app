@@ -80,13 +80,11 @@ export function DashboardProvider({ children }: Props) {
       throw err;
     }
   }
-  console.log('test');
 
   function filterContactNameOnInput(inputValue: string) {
-    console.log(inputValue);
     const searchValue = inputValue.toLowerCase();
     const filtered = userData?.contacts.filter(({ fullName }) => fullName.toLowerCase().includes(searchValue));
-    console.log(filtered);
+
     if (filtered) {
       setFilteredContacts([...filtered]);
     }
