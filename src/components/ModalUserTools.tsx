@@ -11,9 +11,10 @@ import { toast } from 'sonner';
 import Input from './Input';
 
 export default function ModalUserTools() {
-  const { register, setValue, handleSubmit, formState: { errors } } = useForm<OptionalUser>({
+  const { register, setValue, watch, handleSubmit, formState: { errors } } = useForm<OptionalUser>({
     resolver: zodResolver(editUserSchema)
   });
+  const phone = watch('phone');
   const { setShowModalUserTools, setUserData, userData, setShowModalUserDelete } = useDashboard();
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -104,6 +105,7 @@ export default function ModalUserTools() {
           <Input
             type='tel'
             placeholder='Insira um novo número de telefone...'
+            defaultValue={phone}
             label='Número de telefone'
             id='phone'
             register={register('phone')}
