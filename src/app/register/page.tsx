@@ -110,7 +110,7 @@ export default function Register() {
                 error={errors.confirmPassword}
               />
               <Input
-                type='text'
+                type='tel'
                 placeholder='Digite seu número de telefone...'
                 label='Número de telefone'
                 id='phone'
