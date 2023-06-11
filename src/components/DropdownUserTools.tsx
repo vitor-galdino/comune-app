@@ -33,7 +33,7 @@ export default function DropdownUserTools({ setOpen }: DropdownUserToolsProps) {
   return (
     <div
       onClick={() => setOpen(false)}
-      className='absolute z-40 right-0 -top-2 block py-1 mt-12 -mr-1 border border-gray-300 rounded-lg shadow-lg w-44 backdrop-blur-sm'
+      className='absolute z-[999] right-0 -top-4 block py-1 mt-12 -mr-1 border border-gray-300 bg-gray-100/50 rounded-lg shadow-lg w-44 backdrop-blur-sm'
       ref={dropdownRef}
     >
       <label
