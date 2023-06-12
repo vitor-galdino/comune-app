@@ -1,7 +1,8 @@
 'use client';
 import { useDashboard } from '@/contexts/DashboardContext';
-import { ChevronDown, Download, Plus, Search, UserCircle2 } from 'lucide-react';
-import { ChangeEvent, useState } from 'react';
+import { ChevronDown, Download, GripVertical, Plus, Search, UserCircle2 } from 'lucide-react';
+import { ChangeEvent, useEffect, useState } from 'react';
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { Toaster } from 'sonner';
 import BrandName from './BrandName';
 import DropdownTools from './DropdownTools';
@@ -29,15 +30,34 @@ export default function Table() {
   const [dropdownTools, setDropdownTools] = useState<number>(0);
   const [dropdownUserTools, setDropdownUserTools] = useState<boolean>(false);
 
-  const currentContacts = filteredContacts.length ? filteredContacts : contactsData;
+  const [currentContacts, setCurrentContacts] = useState(
+    filteredContacts.length ? filteredContacts : contactsData
+  );
+
+  useEffect(() => {
+    setCurrentContacts(filteredContacts.length ? filteredContacts : contactsData);
+  }, [contactsData, filteredContacts]);
 
   const headings = [
+    { key: 'dragHandle', value: '' },
     { key: 'fullName', value: 'Nome' },
     { key: 'email', value: 'Email' },
     { key: 'phone', value: 'Telefone' },
     { key: 'createdAt', value: 'Data de Registro' },
     { key: 'empty', value: '' },
   ];
+
+  function onDragEnd(result: any) {
+    if (!result.destination) {
+      return;
+    }
+
+    const newContacts = [...currentContacts];
+    const [removed] = newContacts.splice(result.source.index, 1);
+    newContacts.splice(result.destination.index, 0, removed);
+
+    setCurrentContacts(newContacts);
+  }
 
   return (
     <>
@@ -104,57 +124,89 @@ export default function Table() {
             </div>
           </div>
         </div>
-        <div className='relative overflow-x-auto overflow-y-auto bg-gray-100 rounded-lg shadow-lg shadow-gray-300 border border-gray-200 h-[408px]'>
-          <table className='relative w-full whitespace-no-wrap bg-gray-100 border-collapse table-auto table-striped'>
-            <thead>
-              <tr className='text-left'>
-                {headings.map((heading) => (
-                  <th
-                    key={heading.key}
-                    className={`bg-gray-200 sticky top-0 z-10 border-b border-gray-200  px-6 py-4 text-gray-500 font-bold tracking-wider uppercase text-xs`}
-                  >
-                    {heading.value}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody className=''>
-              {contactsData && currentContacts!.map((contact) => (
-                <tr key={contact.id}>
-                  <td className='border-t border-gray-300 border-dashed'>
-                    <span className='flex items-center px-6 py-3 text-gray-700'>
-                      {contact.fullName}
-                    </span>
-                  </td>
-                  <td className='border-t border-gray-300 border-dashed'>
-                    <span className='flex items-center px-6 py-3 text-gray-700'>
-                      {contact.email}
-                    </span>
-                  </td>
-                  <td className='border-t border-gray-300 border-dashed'>
-                    <span className='flex items-center px-6 py-3 text-gray-700'>
-                      {contact.phone}
-                    </span>
-                  </td>
-                  <td className='border-t border-gray-300 border-dashed'>
-                    <span className='flex items-center px-6 py-3 text-gray-700'>
-                      {new Date(contact.createdAt).toLocaleDateString('pt-BR', {
-                        day: '2-digit',
-                        month: '2-digit',
-                        year: 'numeric',
-                        timeZone: 'UTC',
-                      })
-                      }
-                    </span>
-                  </td>
-                  <td className='relative mt-2 mr-4 border-t border-gray-300 border-dashed '>
-                    <DropdownTools contact={contact} open={dropdownTools} setOpen={setDropdownTools} />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <DragDropContext onDragEnd={onDragEnd}>
+          <Droppable droppableId="droppable">
+            {(provided) => (
+              <div ref={provided.innerRef} {...provided.droppableProps}>
+                <div className='relative overflow-x-auto overflow-y-auto bg-gray-100 rounded-lg shadow-xl shadow-gray-200 border border-gray-200 h-[408px]'>
+                  <table className='relative w-full bg-gray-100 border-collapse table-auto'>
+                    <thead>
+                      <tr className='text-left'>
+                        {headings.map((heading) => (
+                          <th
+                            key={heading.key}
+                            className={`
+                            bg-gray-200 sticky top-0 z-10 border-b border-gray-200 ${heading.key == 'dragHandle' ? 'pl-6 pr-1' : heading.key == 'empty' ? '' : 'px-6'} py-4 text-gray-500 font-bold tracking-wider uppercase text-xs
+                            ${heading.key == 'fullName' && 'pl-10'}
+                            `}
+                          >
+                            {heading.value}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {contactsData && currentContacts.map((contact, index) => (
+                        <Draggable key={contact.id} draggableId={contact.id.toString()} index={index}>
+                          {(provided, snapshot) => (
+                            <tr
+                              className={`
+                              relative bg-gray-100 border border-gray-200 ${snapshot.isDragging ? 'flex justify-between items-center bg-gray-100/70 backdrop-blur-sm pl-10 pr-4 rounded-lg border-gray-300' : ''
+                                }`}
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                            >
+                              <td
+                                className='absolute left-0 flex items-center justify-center h-full'
+                              >
+                                <span
+                                  className='w-full h-full flex items-center px-6 py-3 text-gray-400 hover:text-branding-blue'
+                                  {...provided.dragHandleProps}
+                                >
+                                  <GripVertical size={20} strokeWidth={1.5} />
+                                </span>
+                              </td>
+                              <td className=''>
+                                <span className='flex items-center px-6 pl-10 pr-3 text-gray-700'>
+                                  {contact.fullName}
+                                </span>
+                              </td>
+                              <td className=''>
+                                <span className='flex items-center px-6 py-3 text-gray-700'>
+                                  {contact.email}
+                                </span>
+                              </td>
+                              <td className=''>
+                                <span className='flex items-center px-6 py-3 text-gray-700'>
+                                  {contact.phone}
+                                </span>
+                              </td>
+                              <td className=''>
+                                <span className='flex items-center px-6 py-3 text-gray-700'>
+                                  {new Date(contact.createdAt).toLocaleDateString('pt-BR', {
+                                    day: '2-digit',
+                                    month: '2-digit',
+                                    year: 'numeric',
+                                    timeZone: 'UTC',
+                                  })
+                                  }
+                                </span>
+                              </td>
+                              <td className='relative'>
+                                <DropdownTools contact={contact} open={dropdownTools} setOpen={setDropdownTools} />
+                              </td>
+                            </tr>
+                          )}
+                        </Draggable>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
       </div>
       {showModalCreateContact && <ModalCreateContact />}
       {!!showModalEditContact && <ModalEditContact />}
