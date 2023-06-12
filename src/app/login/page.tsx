@@ -15,7 +15,7 @@ export default function Login() {
   const { register, handleSubmit, formState: { errors } } = useForm<LoginData>({
     resolver: zodResolver(loginSchema)
   });
-  const [animate, setAnimate] = useState(false);
+  const [animate, setAnimate] = useState<boolean>(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -31,7 +31,10 @@ export default function Login() {
     const res = instance.post('/login', formData)
       .then(({ data }) => {
         setAuthToken(data.token);
-        router.push('/dashboard');
+        setAnimate(false);
+        setTimeout(() => {
+          router.push('/dashboard');
+        }, 500);
       })
       .catch(err => {
         throw err;
@@ -66,7 +69,7 @@ export default function Login() {
           `} />
           <div className={`
             absolute z-40 w-full h-full flex items-center justify-center transition duration-500
-            ${animate && '-translate-x-[238px]'}
+            ${animate ? '-translate-x-[238px] opacity-100' : 'opacity-0'}
           `}>
             <BrandName fontSize='md:text-6xl min-[660px]:text-4xl text-3xl' />
           </div>
@@ -97,7 +100,20 @@ export default function Login() {
               />
               <button type="submit" className='h-10 mb-4 font-medium text-white transition-all duration-300 border bg-branding-blue rounded-xl hover:bg-white hover:text-branding-blue hover:border-branding-blue'>Entrar</button>
             </form>
-            <span>Ainda não tem uma conta? <Link href='/register' className='text-branding-blue hover:underline decoration-branding-blue'>Cadastra-se</Link></span>
+            <span>Ainda não tem uma conta?{' '}
+              <Link
+                href='/register'
+                onClick={(e) => {
+                  e.preventDefault();
+                  setAnimate(false);
+                  setTimeout(() => {
+                    router.push('/register');
+                  }, 480);
+                }}
+                className='text-branding-blue hover:underline decoration-branding-blue'>
+                Cadastra-se
+              </Link>
+            </span>
           </section>
         </div>
       </main>
