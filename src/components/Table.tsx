@@ -137,7 +137,8 @@ export default function Table() {
                             key={heading.key}
                             className={`
                             bg-gray-200 sticky top-0 z-10 border-b border-gray-200 ${heading.key == 'dragHandle' ? 'pl-6 pr-1' : heading.key == 'empty' ? '' : 'px-6'} py-4 text-gray-500 font-bold tracking-wider uppercase text-xs
-                            ${heading.key == 'fullName' && 'pl-0'}
+                            ${heading.key == 'fullName' && 'pl-0 min-w-[200px]'}
+                            ${heading.key == 'phone' && 'pl-0 min-w-[170px]'}
                             `}
                           >
                             {heading.value}
@@ -167,7 +168,7 @@ export default function Table() {
                                 </span>
                               </td>
                               <td>
-                                <span className='flex items-center pl-0 px-6 pr-3 text-gray-700'>
+                                <span className='flex items-center pl-0 pr-3 text-gray-700'>
                                   {contact.fullName}
                                 </span>
                               </td>
@@ -177,7 +178,7 @@ export default function Table() {
                                 </span>
                               </td>
                               <td>
-                                <span className='flex items-center px-6 py-3 text-gray-700'>
+                                <span className='flex items-center pl-0 py-3 text-gray-700'>
                                   {contact.phone}
                                 </span>
                               </td>
