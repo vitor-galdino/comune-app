@@ -12,4 +12,5 @@ export const createContactSchema = z.object({
   phone: z.string()
     .nonempty('Campo obrigatório')
     .max(14, 'O número ultrapassou o limite de 14 caracteres')
+    .regex(/^\d{2} \d{5}-\d{4}$/, 'Número de telefone inválido'),
 });

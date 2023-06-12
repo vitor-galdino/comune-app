@@ -11,9 +11,10 @@ import { toast } from 'sonner';
 import Input from './Input';
 
 export default function ModalEditContact() {
-  const { register, setValue, handleSubmit, formState: { errors } } = useForm<OptionalContact>({
+  const { register, setValue, watch, handleSubmit, formState: { errors } } = useForm<OptionalContact>({
     resolver: zodResolver(editContactSchema)
   });
+  const phone = watch('phone');
   const { showModalEditContact, setShowModalEditContact, setContactsData, contactsData } = useDashboard();
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -91,8 +92,9 @@ export default function ModalEditContact() {
             error={errors.email}
           />
           <Input
-            type='text'
+            type='tel'
             placeholder='Insira o número de telefone...'
+            defaultValue={phone}
             label='Número de telefone'
             id='phone'
             register={register('phone')}

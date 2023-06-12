@@ -11,9 +11,10 @@ import { toast } from 'sonner';
 import Input from './Input';
 
 export default function ModalUserTools() {
-  const { register, setValue, handleSubmit, formState: { errors } } = useForm<OptionalUser>({
+  const { register, setValue, watch, handleSubmit, formState: { errors } } = useForm<OptionalUser>({
     resolver: zodResolver(editUserSchema)
   });
+  const phone = watch('phone');
   const { setShowModalUserTools, setUserData, userData, setShowModalUserDelete } = useDashboard();
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -102,8 +103,9 @@ export default function ModalUserTools() {
             error={errors.password}
           />
           <Input
-            type='text'
+            type='tel'
             placeholder='Insira um novo número de telefone...'
+            defaultValue={phone}
             label='Número de telefone'
             id='phone'
             register={register('phone')}
@@ -112,7 +114,7 @@ export default function ModalUserTools() {
           <div className='flex gap-3'>
             <button
               type="button"
-              className='h-10 mt-2 w-2/4 font-medium text-white transition-all duration-300 bg-red-600 border rounded-xl hover:bg-white hover:text-red-600 hover:border-red-600'
+              className='h-10 mt-2 w-2/4 font-medium hover:text-white transition-all duration-300 hover:bg-red-600 border rounded-xl bg-white text-red-600 border-red-600'
               onClick={() => {
                 setShowModalUserTools(false);
                 setShowModalUserDelete(true);

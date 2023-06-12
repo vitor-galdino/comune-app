@@ -82,7 +82,7 @@ export default function ModalCreateContact() {
             error={errors.email}
           />
           <Input
-            type='text'
+            type='tel'
             placeholder='Insira o número de telefone...'
             label='Número de telefone'
             id='phone'

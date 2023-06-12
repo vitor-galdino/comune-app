@@ -28,6 +28,7 @@ export default function Register() {
   }, []);
 
   function handleRegister(formData: RegisterData) {
+    delete formData.confirmPassword;
     const res = instance.post('/users', formData)
       .then(() => router.push('/login'))
       .catch(err => {
@@ -45,7 +46,7 @@ export default function Register() {
     <>
       <Toaster />
       <main className='flex justify-center sm:justify-normal'>
-        <div className='overflow-hidden fixed z-10 left-0 w-screen h-20 justify-center rounded-bl-[70px] sm:hidden'>
+        <div className='overflow-hidden fixed z-10 left-0 w-screen h-20 justify-center rounded-bl-[40px] sm:hidden'>
           <div className='absolute inset-0 z-20 scale-[1.3] bg-[url("../assets/background.png")] bg-no-repeat bg-left bg-fixed bg-cover h-full w-full' />
           <div className='absolute inset-0 z-30 bg-[url("../assets/noise.png")] bg-no-repeat bg-cover bg-center bg-fixed h-full w-full' />
           <div className='absolute z-40 flex items-center justify-start w-full h-full ml-16'>
@@ -54,7 +55,7 @@ export default function Register() {
         </div>
         <div className={`
         overflow-hidden fixed z-10 right-0 justify-center h-full w-full transition duration-500 hidden sm:flex
-        ${animate && 'translate-x-[470px] rounded-l-[70px]'}
+        ${animate && 'translate-x-[470px] rounded-l-[40px]'}
         `}>
           <div className='absolute inset-0 z-20 scale-[1.3] bg-[url("../assets/background.png")] bg-no-repeat bg-center bg-fixed bg-cover h-full w-full' />
           <div className={`
@@ -101,7 +102,15 @@ export default function Register() {
                 error={errors.password}
               />
               <Input
-                type='text'
+                type='password'
+                placeholder='Digite sua senha novamente...'
+                label='Confirmar Senha'
+                id='confirmPassword'
+                register={register('confirmPassword')}
+                error={errors.confirmPassword}
+              />
+              <Input
+                type='tel'
                 placeholder='Digite seu número de telefone...'
                 label='Número de telefone'
                 id='phone'
