@@ -3,7 +3,7 @@ import { useDashboard } from '@/contexts/DashboardContext';
 import { LogOut, User2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import nookies from 'nookies';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface DropdownUserToolsProps {
   setOpen: (value: boolean) => void;
@@ -11,6 +11,7 @@ interface DropdownUserToolsProps {
 
 export default function DropdownUserTools({ setOpen }: DropdownUserToolsProps) {
   const { setShowModalUserTools, userData } = useDashboard();
+  const [shouldLeave, setShouldLeave] = useState<number>(0);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
@@ -22,6 +23,7 @@ export default function DropdownUserTools({ setOpen }: DropdownUserToolsProps) {
       if (target.id == 'dropdownButton') return;
 
       if (element && !element.contains(target)) {
+        setShouldLeave(0);
         setOpen(false);
       }
     };
@@ -38,6 +40,7 @@ export default function DropdownUserTools({ setOpen }: DropdownUserToolsProps) {
     >
       <div
         className='relative flex items-center justify-start px-4 py-2 overflow-hidden text-gray-700 rounded-lg hover:bg-gray-100/60'
+        onClick={(e) => e.stopPropagation()}
       >
         <div className='flex flex-col w-full'>
           <span className='text-sm font-medium truncate w-full'>{userData?.fullName}</span>
@@ -57,14 +60,21 @@ export default function DropdownUserTools({ setOpen }: DropdownUserToolsProps) {
       </label>
       <label
         className='relative flex items-center justify-start px-4 py-2 rounded-lg cursor-pointer hover:bg-red-100/40 text-red-500/90'
-        onClick={() => {
-          nookies.destroy(null, 'token');
-          router.push('/');
+        onClick={(e) => {
+          if (!shouldLeave) {
+            e.stopPropagation();
+            setShouldLeave(1);
+          }
+          if (shouldLeave) {
+            setShouldLeave(0);
+            nookies.destroy(null, 'token');
+            router.push('/');
+          }
         }}
       >
         <div className='flex items-center gap-3 select-none'>
           <LogOut strokeWidth={1.5} className='w-5 h-5 text-red-500/80' />
-          Sair
+          {!!shouldLeave ? 'Confirma Saída' : 'Sair'}
         </div>
       </label>
     </div>
