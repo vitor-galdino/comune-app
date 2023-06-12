@@ -15,7 +15,7 @@ export default function Register() {
   const { register, handleSubmit, formState: { errors } } = useForm<RegisterData>({
     resolver: zodResolver(registerSchema)
   });
-  const [animate, setAnimate] = useState(false);
+  const [animate, setAnimate] = useState<boolean>(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -30,7 +30,12 @@ export default function Register() {
   function handleRegister(formData: RegisterData) {
     delete formData.confirmPassword;
     const res = instance.post('/users', formData)
-      .then(() => router.push('/login'))
+      .then(() => {
+        setAnimate(false);
+        setTimeout(() => {
+          router.push('/login');
+        }, 500);
+      })
       .catch(err => {
         throw err;
       });
@@ -64,7 +69,7 @@ export default function Register() {
           `} />
           <div className={`
             absolute z-40 w-full h-full flex items-center justify-center transition duration-500
-            ${animate && '-translate-x-[238px]'}
+            ${animate ? '-translate-x-[238px] opacity-100' : 'opacity-0'}
           `}>
             <BrandName fontSize='md:text-6xl min-[660px]:text-4xl text-3xl' />
           </div>
@@ -119,7 +124,20 @@ export default function Register() {
               />
               <button type="submit" className='h-10 mb-4 font-medium text-white transition-all duration-300 border bg-branding-blue rounded-xl hover:bg-white hover:text-branding-blue hover:border-branding-blue'>Criar</button>
             </form>
-            <span>Já tem uma conta? <Link href='/login' className='text-branding-blue hover:underline decoration-branding-blue'>Login</Link></span>
+            <span>Já tem uma conta?{' '}
+              <Link
+                href='/login'
+                onClick={(e) => {
+                  e.preventDefault();
+                  setAnimate(false);
+                  setTimeout(() => {
+                    router.push('/login');
+                  }, 480);
+                }}
+                className='text-branding-blue hover:underline decoration-branding-blue'>
+                Login
+              </Link>
+            </span>
           </section>
         </div>
       </main>

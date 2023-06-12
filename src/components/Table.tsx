@@ -3,6 +3,7 @@ import { useDashboard } from '@/contexts/DashboardContext';
 import { ChevronDown, Download, GripVertical, Plus, Search, UserCircle2 } from 'lucide-react';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
+import HashLoader from "react-spinners/HashLoader";
 import { Toaster } from 'sonner';
 import BrandName from './BrandName';
 import DropdownTools from './DropdownTools';
@@ -26,6 +27,8 @@ export default function Table() {
     showModalDeleteContact,
     showModalUserTools,
     showModalUserDelete,
+    animate,
+    setAnimate,
   } = useDashboard();
   const [dropdownTools, setDropdownTools] = useState<number>(0);
   const [dropdownUserTools, setDropdownUserTools] = useState<boolean>(false);
@@ -33,6 +36,7 @@ export default function Table() {
   const [currentContacts, setCurrentContacts] = useState(
     filteredContacts.length ? filteredContacts : contactsData
   );
+
 
   useEffect(() => {
     setCurrentContacts(filteredContacts.length ? filteredContacts : contactsData);
@@ -62,12 +66,25 @@ export default function Table() {
   return (
     <>
       <Toaster />
-      <div className='fixed z-40 left-0 right-0 top-0 w-full h-20 justify-center rounded-bl-[40px]'>
+      <div className={`fixed z-40 left-0 right-0 top-0 w-full ${animate ? 'h-20' : 'h-screen'} transition-[height] duration-500 justify-center rounded-bl-[40px]`}>
+        <HashLoader
+          color='#fff'
+          cssOverride={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            zIndex: '9999',
+            opacity: `${animate ? 0 : 0.8}`,
+            transition: 'opacity .5s',
+          }}
+          size={80}
+        />
         <div className='overflow-hidden absolute w-full h-full rounded-bl-[40px] justify-center'>
           <div className='absolute inset-0 z-20 scale-[1.3] bg-[url("../assets/background.png")] bg-no-repeat bg-left bg-fixed bg-cover h-full w-full' />
           <div className='absolute inset-0 z-30 bg-[url("../assets/noise.png")] bg-no-repeat bg-cover bg-center bg-fixed h-full w-full' />
         </div>
-        <div className='container relative z-40 flex items-center justify-between h-full px-4 mx-auto '>
+        <div className={`container relative z-40 flex items-center justify-between h-full px-4 mx-auto ${animate ? 'opacity-100' : 'opacity-0'} transition duration-500`}>
           <BrandName fontSize='text-3xl' />
           <div className='relative flex items-end mt-3'>
             <button
@@ -83,7 +100,7 @@ export default function Table() {
                 <ChevronDown id='dropdownButton' size={20} strokeWidth={2.75} />
               </span>
             </button>
-            {dropdownUserTools && <DropdownUserTools setOpen={setDropdownUserTools} />}
+            {dropdownUserTools && <DropdownUserTools setOpen={setDropdownUserTools} setAnimate={setAnimate} />}
           </div>
         </div>
       </div>
