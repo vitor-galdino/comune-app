@@ -137,7 +137,7 @@ export default function Table() {
                             key={heading.key}
                             className={`
                             bg-gray-200 sticky top-0 z-10 border-b border-gray-200 ${heading.key == 'dragHandle' ? 'pl-6 pr-1' : heading.key == 'empty' ? '' : 'px-6'} py-4 text-gray-500 font-bold tracking-wider uppercase text-xs
-                            ${heading.key == 'fullName' && 'pl-10'}
+                            ${heading.key == 'fullName' && 'pl-0'}
                             `}
                           >
                             {heading.value}
@@ -151,13 +151,13 @@ export default function Table() {
                           {(provided, snapshot) => (
                             <tr
                               className={`
-                              relative bg-gray-100 border border-gray-200 ${snapshot.isDragging ? 'flex justify-between items-center bg-gray-100/70 backdrop-blur-sm pl-10 pr-4 rounded-lg border-gray-300' : ''
+                              relative bg-gray-100 border border-gray-200 ${snapshot.isDragging ? 'flex justify-between items-center bg-gray-100/70 backdrop-blur-sm  pr-4 rounded-lg border-gray-300' : ''
                                 }`}
                               ref={provided.innerRef}
                               {...provided.draggableProps}
                             >
                               <td
-                                className='absolute top-0 left-0 flex items-center justify-center h-full'
+                                className='-mr-10 w-16 h-full'
                               >
                                 <span
                                   className={`w-full h-full flex items-center px-6 py-3 hover:text-branding-blue ${snapshot.isDragging ? 'text-branding-blue' : 'text-gray-400'}`}
@@ -167,7 +167,7 @@ export default function Table() {
                                 </span>
                               </td>
                               <td>
-                                <span className='flex items-center px-6 pl-10 pr-3 text-gray-700'>
+                                <span className='flex items-center pl-0 px-6 pr-3 text-gray-700'>
                                   {contact.fullName}
                                 </span>
                               </td>
