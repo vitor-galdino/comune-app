@@ -104,7 +104,7 @@ export default function Table() {
             </div>
           </div>
         </div>
-        <div className='relative overflow-x-auto overflow-y-auto bg-white rounded-lg shadow-lg shadow-gray-300 border border-gray-200 h-[408px]'>
+        <div className='relative overflow-x-auto overflow-y-auto bg-gray-100 rounded-lg shadow-lg shadow-gray-300 border border-gray-200 h-[408px]'>
           <table className='relative w-full whitespace-no-wrap bg-gray-100 border-collapse table-auto table-striped'>
             <thead>
               <tr className='text-left'>
