@@ -7,9 +7,10 @@ import { useEffect, useRef, useState } from 'react';
 
 interface DropdownUserToolsProps {
   setOpen: (value: boolean) => void;
+  setAnimate: (value: boolean) => void;
 }
 
-export default function DropdownUserTools({ setOpen }: DropdownUserToolsProps) {
+export default function DropdownUserTools({ setOpen, setAnimate }: DropdownUserToolsProps) {
   const { setShowModalUserTools, userData } = useDashboard();
   const [shouldLeave, setShouldLeave] = useState<number>(0);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -67,8 +68,9 @@ export default function DropdownUserTools({ setOpen }: DropdownUserToolsProps) {
           }
           if (shouldLeave) {
             setShouldLeave(0);
+            setAnimate(false);
             nookies.destroy(null, 'token');
-            router.push('/');
+            setTimeout(() => router.push('/'), 500);
           }
         }}
       >
