@@ -128,7 +128,7 @@ export default function Table() {
           <Droppable droppableId="droppable">
             {(provided) => (
               <div ref={provided.innerRef} {...provided.droppableProps}>
-                <div className='relative overflow-x-auto overflow-y-auto bg-gray-100 rounded-lg shadow-xl shadow-gray-200 border border-gray-200 h-[408px]'>
+                <div className='relative overflow-x-auto overflow-y-auto w-full bg-gray-100 rounded-lg shadow-xl shadow-gray-200 border border-gray-200 h-[408px]'>
                   <table className='relative w-full bg-gray-100 border-collapse table-auto'>
                     <thead>
                       <tr className='text-left'>
@@ -157,31 +157,31 @@ export default function Table() {
                               {...provided.draggableProps}
                             >
                               <td
-                                className='absolute left-0 flex items-center justify-center h-full'
+                                className='absolute top-0 left-0 flex items-center justify-center h-full'
                               >
                                 <span
-                                  className='w-full h-full flex items-center px-6 py-3 text-gray-400 hover:text-branding-blue'
+                                  className={`w-full h-full flex items-center px-6 py-3 hover:text-branding-blue ${snapshot.isDragging ? 'text-branding-blue' : 'text-gray-400'}`}
                                   {...provided.dragHandleProps}
                                 >
                                   <GripVertical size={20} strokeWidth={1.5} />
                                 </span>
                               </td>
-                              <td className=''>
+                              <td>
                                 <span className='flex items-center px-6 pl-10 pr-3 text-gray-700'>
                                   {contact.fullName}
                                 </span>
                               </td>
-                              <td className=''>
+                              <td>
                                 <span className='flex items-center px-6 py-3 text-gray-700'>
                                   {contact.email}
                                 </span>
                               </td>
-                              <td className=''>
+                              <td>
                                 <span className='flex items-center px-6 py-3 text-gray-700'>
                                   {contact.phone}
                                 </span>
                               </td>
-                              <td className=''>
+                              <td>
                                 <span className='flex items-center px-6 py-3 text-gray-700'>
                                   {new Date(contact.createdAt).toLocaleDateString('pt-BR', {
                                     day: '2-digit',
