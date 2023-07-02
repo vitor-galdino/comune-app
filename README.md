@@ -1,34 +1,61 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1 align="center">Comune App</h1>
 
-## Getting Started
+<blockquote>
+    <br>
+        <p>Comune is an application that allows you to manage your contacts in an easy and intuitive way. With a secure registration and login system, you can access your personal dashboard and add, edit and delete contacts.</p>
+    <br>
+</blockquote>
 
-First, run the development server:
+<blockquote>
+    
+This repository contains the code for the frontend of the application. The backend code can be found in the [Comune Server repository](https://github.com/vitor-galdino/comune-server).
+    
+</blockquote>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+<br>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<h2>Features</h2>
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Secure registration and login system.
+- Personal dashboard to manage contacts.
+- Add, edit and delete contacts like in a telephone spreadsheet.
+- Generate PDF reports with contact information.
+- Developed with modern technologies such as Next.js, Tailwind CSS and TypeScript.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+<br>
 
-## Learn More
+<h2>Deploy on Vercel</h2>
 
-To learn more about Next.js, take a look at the following resources:
+Visit this application [Comune - Website](https://comune.vercel.app/) to see it in action.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<br>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+<h2>Installation</h2>
 
-## Deploy on Vercel
+Installing and running the project is easy and fast. Just follow these steps:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Clone this repository to your local machine.
+2. Install dependencies: `yarn install` or `npm install`.
+3. Start the development server by running `yarn dev` or `npm run dev`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+The application should now be running on http://localhost:3000.
+
+<br>
+
+<h2>Technologies used</h2>
+
+- [Next.js](https://nextjs.org/): React-based framework for building server-rendered or statically-exported applications.
+- [Tailwind CSS](https://tailwindcss.com/): utility-first CSS framework for rapidly building custom designs.
+- [TypeScript](https://www.typescriptlang.org/): typed programming language that increases code productivity and readability.
+
+<br>
+
+<h2>Contributing</h2>
+
+To contribute to this project, please follow these guidelines:
+
+1. Fork the repository
+2. Create a new branch: `git checkout -b feat/yourFeatureName`
+3. Make your changes and commit them using Conventional Commits
+4. Push to the branch: `git push origin feat/yourFeatureName`
+5. Submit a pull request
